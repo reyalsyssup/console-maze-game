@@ -1,5 +1,4 @@
 import copy, os
-from time import sleep
 
 def clear():
     # windows
@@ -59,7 +58,7 @@ class Board:
         lastpos = player.pos()
         while True:
             clear()
-            print(f"You pos: {player.pos()}")
+            print(f"Your pos: {player.pos()}")
             self.render()
             move = input("Make a move (w, a, s, d): ")
             if move == "w": player.y += -1
