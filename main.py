@@ -1,4 +1,5 @@
 import copy, os
+from time import sleep
 
 def clear():
     # windows
@@ -37,15 +38,13 @@ class Board:
                 col.append(copy.deepcopy(Cell("", "empty")))
             grid.append(col)
         self.grid = grid
-    
-    def init(self):
         for row in range(len(self.grid)):
             for i in range(len(self.grid[row])):
                 # sets the walls
                 if row == 0 or i == 0 or i == self.width-1 or row == self.height-1:
                     self.grid[row][i].state = "wall"
                 else: self.grid[row][i].state = "empty"
-
+        
     def render(self):
         spacing = ""
         for i in range(self.spacing): spacing+=" "
@@ -57,7 +56,6 @@ class Board:
             print()
     
     def game(self):
-        self.init()
         lastpos = player.pos()
         while True:
             clear()
