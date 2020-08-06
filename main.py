@@ -54,22 +54,13 @@ class Board:
                     self.grid[row][i].state = "player"
                 print(self.grid[row][i].render(), end=spacing)
             print()
-
-    def toText(self):
-        newArray = []
-        for row in self.grid:
-            newRow = []
-            for i in row:
-                newRow.append(i.render())
-            newArray.append(newRow)
-        return newArray
     
-    def game(self):
+    def game(self):            
+        self.grid = mazeGen.genMaze(self.grid)
         lastpos = player.pos()
         while True:
             clear()
             print(f"Your pos: {player.pos()}")
-            mazeGen.genMaze(self.grid)
             self.render()
             move = input("Make a move (w, a, s, d): ")
             if move == "w": player.y += -1
@@ -77,8 +68,7 @@ class Board:
             elif move == "a": player.x += -1
             elif move == "d": player.x += 1
             # boundaries (modified to suite maze walls && border)
-            print(self.grid[player.x][player.y].state)
-            if self.grid[player.x][player.y].state == "wall":
+            if self.grid[player.y][player.x].state == "wall":
                 player.x = lastpos[0]; player.y = lastpos[1]
             # changes the player's previous positon back to empty
             self.grid[lastpos[1]][lastpos[0]].state = "empty"

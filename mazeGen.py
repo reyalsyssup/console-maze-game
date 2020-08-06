@@ -13,8 +13,19 @@ def genMaze(array):
     # split into quarters... i cant spell :(
     for row in range(len(array)):
         for i in range(len(array[row])):
-            if i == halfWidth:
+            if i == halfWidth or row == halfHeight:
                 array[row][i].state = "wall"
-            if row == halfHeight:
-                array[row][i].state = "wall"
+    # randomly remove a spot in each wall
+    # gen 2 random spots cant be dead centre
+    rowPosRight = random.randint(halfHeight+1, width)
+    iPosDown = random.randint(halfWidth+1, height)
+
+    rowPosLeft = random.randint(1, halfWidth-1)
+    iPosUp = random.randint(1,halfWidth-1 )
+
+    array[rowPosRight][halfWidth].state = "empty"
+    array[halfHeight][iPosDown].state = "empty"
+    array[rowPosLeft][halfWidth].state = "empty"
+    array[halfHeight][iPosUp].state = "empty"
     
+    return array
